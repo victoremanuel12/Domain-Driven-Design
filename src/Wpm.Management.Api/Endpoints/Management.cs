@@ -10,12 +10,12 @@ namespace Wpm.Management.Api.Endpoints
     {
         public void Map(WebApplication app)
         {
-            var group = app.Generate(EndpointConstantCollection.Management, "Management", "Endpoints");
+            var group = app.Generate(EndpointManagementConstantCollection.Management, "Management", "Endpoints");
             group.MapPost("/", async (CreatePetCommand command, ManagementApplicationService managementApplicationService) =>
             {
                 await managementApplicationService.Handle(command);
                 return Results.Ok();
-            }).WithAutoName(EndpointConstantCollection.Management, "CreatePet");
+            }).WithAutoName(EndpointManagementConstantCollection.Management, "CreatePet");
             group.MapPut("/", async (
                 ICommandHandler<SetWeightCommand> commandHandler,
                 ManagementApplicationService managementApplicationService,
@@ -23,7 +23,7 @@ namespace Wpm.Management.Api.Endpoints
             {
                 await commandHandler.Handle(command);
                 return Results.Ok();
-            }).WithAutoName(EndpointConstantCollection.Management, "SetWeight");
+            }).WithAutoName(EndpointManagementConstantCollection.Management, "SetWeight");
         }
     }
 }

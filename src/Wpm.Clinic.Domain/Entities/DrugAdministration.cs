@@ -8,6 +8,8 @@ namespace Wpm.Clinic.Domain.Entities
 
         public DrugId DrugId { get; init; }
         public Dose Dose { get; init; }
+
+        public DrugAdministration() { }
         public DrugAdministration(DrugId drugId, Dose dose)
         {
             Id = Guid.NewGuid();

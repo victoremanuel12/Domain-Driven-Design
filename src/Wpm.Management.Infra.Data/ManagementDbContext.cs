@@ -1,8 +1,6 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Wpm.Management.Domain.Entities;
 using Wpm.Management.Domain.ValueObjects;
-
 namespace Wpm.Management.Infra.Data
 {
     public class ManagementDbContext(DbContextOptions<ManagementDbContext> options) : DbContext(options)
