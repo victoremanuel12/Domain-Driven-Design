@@ -9,6 +9,7 @@
                 throw new ArgumentException("Weight value is not valid");
             Value = value;
         }
+        //private Weight(){}
         // Esse é um operador de conversão implícita(implicit operator) do C#.
         //Ele permite que um valor do tipo double seja automaticamente convertido em um objeto Weight, sem precisar chamar o construtor explicitamente.
         //O método estático implicit operator Weight(double value) é um atalho do compilador que transforma double automaticamente em Weight,
