@@ -3,26 +3,26 @@
     public record PatiendId
     {
 
-        public Guid Id { get; set; }
+        public Guid Value { get; set; }
 
-        public PatiendId(Guid id)
+        public PatiendId(Guid value)
         {
-            Validate(id);
-            Id = id;
+            Validate(value);
+            Value = value;
         }
 
-        private void Validate(Guid id)
+        private void Validate(Guid value)
         {
-            if (id == Guid.Empty)
+            if (value == Guid.Empty)
             {
                 throw new ArgumentNullException("PatiendId", "The identifier is not valid");
 
             }
 
         }
-        public static implicit operator PatiendId(Guid id)
+        public static implicit operator PatiendId(Guid value)
         {
-            return new PatiendId(id);
+            return new PatiendId(value);
         }
     }
 

@@ -8,9 +8,7 @@ namespace Wpm.Management.Application.Handlers
     {
         public async Task Handle(SetWeightCommand command)
         {
-            var pet = await managementRepository.GetByIdAsync(command.Id);
-            if (pet is null)
-                throw new InvalidOperationException($"Pet {command.Id} não encontrado.");
+            var pet = await managementRepository.GetByIdAsync(command.Id) ?? throw new InvalidOperationException($"Pet {command.Id} não encontrado.");
             pet.SetWeight(command.Weight, breedService);
             await managementRepository.UpdateAsync(pet);
         }
