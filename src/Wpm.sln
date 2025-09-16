@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpm.Management.Domain.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpm.Management.Api", "Wpm.Management.Api\Wpm.Management.Api.csproj", "{75A58BDD-6ACF-483C-9749-ABAAE862E107}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpm.Clinic.Tests", "Wpm.Clinic.Tests\Wpm.Clinic.Tests.csproj", "{46FB4E29-55D1-4224-BAFE-8C9AA8E316FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +91,10 @@ Global
 		{75A58BDD-6ACF-483C-9749-ABAAE862E107}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75A58BDD-6ACF-483C-9749-ABAAE862E107}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75A58BDD-6ACF-483C-9749-ABAAE862E107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46FB4E29-55D1-4224-BAFE-8C9AA8E316FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FB4E29-55D1-4224-BAFE-8C9AA8E316FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46FB4E29-55D1-4224-BAFE-8C9AA8E316FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46FB4E29-55D1-4224-BAFE-8C9AA8E316FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{69BDE01B-A375-4303-97BF-D82228174244} = {0D7F49AC-B47F-47CF-9D6D-2A92AEAB8E69}
 		{158B4378-BDA1-4409-9CE9-9B70BA68098D} = {0D7F49AC-B47F-47CF-9D6D-2A92AEAB8E69}
 		{75A58BDD-6ACF-483C-9749-ABAAE862E107} = {0D7F49AC-B47F-47CF-9D6D-2A92AEAB8E69}
+		{46FB4E29-55D1-4224-BAFE-8C9AA8E316FB} = {FE5AF4AF-A719-46E2-A1CD-0B7309FAB028}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C47A2B2C-AA11-4619-BBCA-B5040AC78EA5}

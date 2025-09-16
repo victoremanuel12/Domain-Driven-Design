@@ -47,7 +47,7 @@ public class ClinicDbContext(DbContextOptions<ClinicDbContext> options) : DbCont
             });
             entity.OwnsOne(c => c.CurrentWeight, w =>
             {
-                w.Property(x => x.Value).HasColumnName("WeightValue").IsRequired();
+                w.Property(x => x.Value).HasColumnName("Weight").IsRequired();
             });
 
             entity.OwnsOne(c => c.Diagnosis, t =>
