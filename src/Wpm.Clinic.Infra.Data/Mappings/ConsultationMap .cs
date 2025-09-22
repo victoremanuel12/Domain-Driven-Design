@@ -13,8 +13,13 @@
             {
                 entity.HasKey(e => e.Id);
 
-                entity.Property(e => e.StartedAt).IsRequired();
-                entity.Property(e => e.EndedAt);
+                
+                entity.OwnsOne(d => d.DateTimeRange, w =>
+                {
+                    w.Property(x => x.StartedAt).HasColumnName("StartedAt").IsRequired();
+                    w.Property(x => x.EndedAt).HasColumnName("EndedAt");
+                    w.Property(x => x.Duration).HasColumnName("Duration");
+                });
 
                 entity.OwnsMany(c => c.AdministrateredDrugs, drug =>
                 {

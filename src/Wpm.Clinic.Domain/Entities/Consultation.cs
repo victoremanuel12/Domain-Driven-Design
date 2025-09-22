@@ -8,8 +8,7 @@ namespace Wpm.Clinic.Domain.Entities
     {
         private readonly List<DrugAdministration> administratedDrugs = new();
         private readonly List<VitalSigns> vitalSignsReadings = new();
-        public DateTime StartedAt { get; init; }
-        public DateTime? EndedAt { get; private set; }
+        public DateTimeRange DateTimeRange { get; private set; }
         public Text? Diagnosis { get; private set; }
         public Text? Treatment { get; private set; }
         public PatiendId PatiendId { get; init; }
@@ -22,7 +21,7 @@ namespace Wpm.Clinic.Domain.Entities
             Id = Guid.NewGuid();
             PatiendId = patiendId;
             Status = ConsultationStatus.Open;
-            StartedAt = DateTime.UtcNow;
+            DateTimeRange = DateTime.UtcNow;
         }
         public void SetWheight(Weight weight)
         {
@@ -59,10 +58,9 @@ namespace Wpm.Clinic.Domain.Entities
             if (Diagnosis == null || Treatment == null || CurrentWeight == null)
             {
                 throw new InvalidOperationException("The consultation cannot be ended");
-
             }
             Status = ConsultationStatus.Closed;
-            EndedAt = DateTime.UtcNow;
+            DateTimeRange.SetEndTime(DateTime.UtcNow);
         }
         private void ValidateConsultationStatus()
         {

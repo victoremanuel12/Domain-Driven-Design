@@ -1,7 +1,7 @@
 ﻿using Wpm.Clinic.Domain.Entities;
 using Wpm.Clinic.Domain.ValueObjects;
 
-namespace Wpm.Clinic.Tests
+namespace Wpm.Clinic.Tests.DomainTests
 {
     public class ConsultationTests
     {
