@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wpm.Management.Domain.Entities;
-using Wpm.Management.Domain.Repository.Interfaces;
+using Wpm.SharedKerbel.Abstract;
 
 namespace Wpm.Management.Infra.Data.Repository;
 
-public class ManagementRepository(ManagementDbContext dbContext) : IManagementRepository
+public class ManagementRepository(ManagementDbContext dbContext) : IRepository<Pet>
 {
 
     public async Task<Pet?> GetByIdAsync(Guid id)
@@ -13,10 +13,11 @@ public class ManagementRepository(ManagementDbContext dbContext) : IManagementRe
     public async Task<IEnumerable<Pet>> GetAllAsync()
         => await dbContext.Pets.ToListAsync();
 
-    public async Task InsertAsync(Pet pet)
+    public async Task<Guid> InsertAsync(Pet pet)
     {
         await dbContext.Pets.AddAsync(pet);
         await dbContext.SaveChangesAsync();
+        return pet.Id;
     }
 
     public async Task UpdateAsync(Pet pet)

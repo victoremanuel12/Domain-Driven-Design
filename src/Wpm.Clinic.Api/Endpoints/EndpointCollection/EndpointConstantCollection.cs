@@ -2,7 +2,7 @@
 {
     public static class EndpointClinicConstantCollection
     {
-        public const string NewConsultation = "NewConsultation";
+        public const string NewConsultation = "Consultation";
     
 
     }

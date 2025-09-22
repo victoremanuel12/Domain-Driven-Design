@@ -5,10 +5,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Wpm.Management.Application.Commands;
 using Wpm.Management.Application.Handlers;
 using Wpm.Management.Application.Services;
-using Wpm.Management.Domain.Repository.Interfaces;
+using Wpm.Management.Domain.Entities;
 using Wpm.Management.Domain.Services.Interfaces;
 using Wpm.Management.Infra.Data;
 using Wpm.Management.Infra.Data.Repository;
+using Wpm.SharedKerbel.Abstract;
+using Wpm.SharedKerbel.CommandHandler;
 
 namespace Wpm.Management.Infra.IoC
 {
@@ -21,9 +23,9 @@ namespace Wpm.Management.Infra.IoC
             services.AddDbContext<ManagementDbContext>(options =>
                 options.UseSqlite(connectionString));
 
-            services.AddScoped<IManagementRepository, ManagementRepository>();
-            services.AddScoped<IBreedService, BreedService>();
+            services.AddScoped<IRepository<Pet>, ManagementRepository>();
             services.AddScoped<ICommandHandler<SetWeightCommand>, SetWeightCommandHandler>();
+            services.AddScoped<IBreedService, BreedService>();
 
             services.AddScoped<ManagementApplicationService>();
 

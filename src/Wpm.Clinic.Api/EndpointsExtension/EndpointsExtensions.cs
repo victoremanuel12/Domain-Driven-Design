@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Wpm.Clinic.Api.Endpoints;
+using Wpm.Clinic.Api.Endpoints.Intefaces;
 
 namespace Wpm.Clinic.Api.EndpointsExtension
 {

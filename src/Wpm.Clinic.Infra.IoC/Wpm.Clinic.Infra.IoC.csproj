@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Wpm.Clinic.Application\Wpm.Clinic.Application.csproj" />
     <ProjectReference Include="..\Wpm.Clinic.Infra.Data\Wpm.Clinic.Infra.Data.csproj" />
   </ItemGroup>
 

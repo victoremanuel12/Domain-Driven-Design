@@ -10,10 +10,10 @@ namespace Wpm.Clinic.Domain.Entities
         private readonly List<VitalSigns> vitalSignsReadings = new();
         public DateTime StartedAt { get; init; }
         public DateTime? EndedAt { get; private set; }
-        public Text Diagnosis { get; private set; }
-        public Text Treatment { get; private set; }
+        public Text? Diagnosis { get; private set; }
+        public Text? Treatment { get; private set; }
         public PatiendId PatiendId { get; init; }
-        public Weight CurrentWeight { get; private set; }
+        public Weight? CurrentWeight { get; private set; }
         public ConsultationStatus Status { get; private set; }
         public IReadOnlyCollection<DrugAdministration> AdministrateredDrugs => administratedDrugs;
         public IReadOnlyCollection<VitalSigns> VitalSignsReadings => vitalSignsReadings;
@@ -39,6 +39,20 @@ namespace Wpm.Clinic.Domain.Entities
             ValidateConsultationStatus();
             Treatment = treatment;
         }
+
+
+        public void AdministerDrug(DrugId drugId, Dose dose)
+        {
+            ValidateConsultationStatus();
+            var newDrugAdministration = new DrugAdministration(drugId, dose);
+            administratedDrugs.Add(newDrugAdministration);
+
+        }
+        public void RegisterVitalSigns(IEnumerable<VitalSigns> vitalSigns)
+        {
+            ValidateConsultationStatus();
+            vitalSignsReadings.AddRange(vitalSigns);
+        }
         public void End()
         {
             ValidateConsultationStatus();
@@ -56,19 +70,6 @@ namespace Wpm.Clinic.Domain.Entities
             {
                 throw new InvalidOperationException("The consultations is already closed");
             }
-        }
-
-        public void AdministerDrug(DrugId drugId, Dose dose)
-        {
-            ValidateConsultationStatus();
-            var newDrugAdministration = new DrugAdministration(drugId, dose);
-            administratedDrugs.Add(newDrugAdministration);
-
-        }
-        public void RegisterVitalSigns(IEnumerable<VitalSigns> vitalSigns)
-        {
-            ValidateConsultationStatus();
-            vitalSignsReadings.AddRange(vitalSigns);
         }
     }
 }

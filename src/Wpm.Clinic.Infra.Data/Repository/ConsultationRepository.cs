@@ -1,33 +1,37 @@
-﻿using Wpm.Clinic.Domain.Entities;
-using Wpm.Clinic.Domain.Repository.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Wpm.Clinic.Domain.Entities;
+using Wpm.SharedKerbel.Abstract;
 
 namespace Wpm.Clinic.Infra.Data.Repository
 {
-    public class ConsultationRepository : IConsultationRepository
+    public class ConsultationRepository(ClinicDbContext dbContext) : IRepository<Consultation>
     {
-        public void Delete(Guid id)
+        public async Task<Guid> InsertAsync(Consultation consultation)
         {
-            throw new NotImplementedException();
+            dbContext.Consultations.Add(consultation);
+            await dbContext.SaveChangesAsync();
+            return consultation.Id;
+        }
+        public async Task<IEnumerable<Consultation>> GetAllAsync() => await dbContext.Consultations.ToListAsync();
+
+        public async Task<Consultation?> GetByIdAsync(Guid id) => await dbContext.Consultations.FirstOrDefaultAsync(e => e.Id == id);
+
+
+        public async Task UpdateAsync(Consultation consultation)
+        {
+            dbContext.Consultations.Update(consultation); 
+            await dbContext.SaveChangesAsync();
+        }
+        public async Task DeleteAsync(Guid id)
+        {
+            var entity = await dbContext.Consultations.FirstOrDefaultAsync(e => e.Id == id);
+            dbContext.Consultations.Remove(entity);
+            await dbContext.SaveChangesAsync();
         }
 
-        public IEnumerable<Consultation> GetAll()
+        public async Task SaveChangesAsync()
         {
-            throw new NotImplementedException();
-        }
-
-        public Consultation? GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Insert(Consultation consultation)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Consultation consultation)
-        {
-            throw new NotImplementedException();
+            await dbContext.SaveChangesAsync();
         }
     }
 }

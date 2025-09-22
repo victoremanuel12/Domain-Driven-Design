@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Wpm.SharedKerbel\Wpm.SharedKerbel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repository\" />
+  </ItemGroup>
+
 </Project>

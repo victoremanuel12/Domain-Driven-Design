@@ -2,6 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Wpm.Clinic.Application.Commands;
+using Wpm.Clinic.Application.Handlers;
+using Wpm.Clinic.Domain.Entities;
+using Wpm.Clinic.Infra.Data.Repository;
+using Wpm.SharedKerbel.Abstract;
+using Wpm.SharedKerbel.CommandHandler;
 
 namespace Wpm.Clinic.Infra.IoC
 {
@@ -13,6 +19,20 @@ namespace Wpm.Clinic.Infra.IoC
 
             services.AddDbContext<ClinicDbContext>(options =>
                 options.UseSqlite(connectionString));
+
+            services.AddScoped<IRepository<Consultation>, ConsultationRepository>();
+            services.AddScoped<ICommandHandler<StartConsultationCommand,Guid>, StartConsultationCommandHandler>();
+            services.AddScoped<ICommandHandler<AdministerDrugCommand>, AdministerDrugCommandHandler>();
+            services.AddScoped<ICommandHandler<RegisterVitalSignsCommand>, RegisterVitalSignsCommandHandler>();
+            services.AddScoped<ICommandHandler<SetWeightCommand>, SetWeightCommandHandler>();
+            services.AddScoped<ICommandHandler<SetTreatmentCommand>, SetTreatmentCommandHandler>();
+            services.AddScoped<ICommandHandler<SetDiagnosisCommand>, SetDiagnosisCommandHandler>();
+            services.AddScoped<ICommandHandler<SetDiagnosisCommand>, SetDiagnosisCommandHandler>();
+            services.AddScoped<ICommandHandler<SetDiagnosisCommand>, SetDiagnosisCommandHandler>();
+            services.AddScoped<ICommandHandler<EndConsultationCommand>, EndConsultationCommandHandler>();
+
+
+
 
 
             return services;

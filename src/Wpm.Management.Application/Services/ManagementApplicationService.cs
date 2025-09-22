@@ -1,12 +1,12 @@
 ﻿using Wpm.Management.Application.Commands;
 using Wpm.Management.Domain.Entities;
-using Wpm.Management.Domain.Repository.Interfaces;
 using Wpm.Management.Domain.Services.Interfaces;
 using Wpm.Management.Domain.ValueObjects;
+using Wpm.SharedKerbel.Abstract;
 
 namespace Wpm.Management.Application.Services
 {
-    public class ManagementApplicationService(IBreedService breedService, IManagementRepository managementRepository)
+    public class ManagementApplicationService(IBreedService breedService, IRepository<Pet> repository)
     {
 
 
@@ -21,7 +21,7 @@ namespace Wpm.Management.Application.Services
                               command.Color,
                               breedId
                               );
-            await managementRepository.InsertAsync(newPet);
+            await repository.InsertAsync(newPet);
         }
     }
 }

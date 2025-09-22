@@ -1,4 +1,4 @@
-﻿namespace Wpm.Clinic.Api.Endpoints
+﻿namespace Wpm.Clinic.Api.Endpoints.Intefaces
 {
     public interface IEndpoint
     {
