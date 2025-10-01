@@ -2,7 +2,6 @@
 using Wpm.Clinic.Domain.Entities;
 using Wpm.Clinic.Domain.ValueObjects;
 using Wpm.SharedKerbel.Abstract;
-using Wpm.SharedKerbel.CommandHandler;
 
 namespace Wpm.Clinic.Application.Handlers
 {

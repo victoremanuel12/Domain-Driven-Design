@@ -18,5 +18,9 @@
         {
             return new Weight(value);
         }
+        public static implicit operator decimal(Weight value)
+        {
+            return value.Value;
+        }
     }
 }

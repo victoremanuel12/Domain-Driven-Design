@@ -1,4 +1,4 @@
-﻿namespace Wpm.SharedKerbel.CommandHandler
+﻿namespace Wpm.SharedKerbel.Abstract
 {
     public interface ICommandHandler<T>
     {

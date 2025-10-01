@@ -1,4 +1,5 @@
 ﻿
+using Wpm.Management.Domain.Events;
 using Wpm.Management.Domain.Services.Interfaces;
 using Wpm.Management.Domain.ValueObjects;
 using Wpm.SharedKernel;
@@ -30,6 +31,7 @@ namespace Wpm.Management.Domain.Entities
         {
             Weight = weight;
             SetWeihgtClass(breedService);
+            DomainEvents.PetWeightUpdated.Publish(new PetWeightUpdated(Id, Weight));
         }
         // O SetWeight exemplifica o Recurring Pattern porque cada vez que um peso é atribuído,
         // a regra de negócio associada (cálculo da WeightClass) é reexecutada automaticamente.

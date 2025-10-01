@@ -16,14 +16,14 @@ public class ManagementRepository(ManagementDbContext dbContext) : IRepository<P
     public async Task<Guid> InsertAsync(Pet pet)
     {
         await dbContext.Pets.AddAsync(pet);
-        await dbContext.SaveChangesAsync();
+        await SaveChangesAsync();
         return pet.Id;
     }
 
     public async Task UpdateAsync(Pet pet)
     {
         dbContext.Pets.Update(pet);
-        await dbContext.SaveChangesAsync();
+        await SaveChangesAsync();
     }
 
     public async Task DeleteAsync(Guid id)
@@ -32,7 +32,12 @@ public class ManagementRepository(ManagementDbContext dbContext) : IRepository<P
         if (pet != null)
         {
             dbContext.Pets.Remove(pet);
-            await dbContext.SaveChangesAsync();
+            await SaveChangesAsync();
         }
+    }
+
+    public async Task SaveChangesAsync()
+    {
+        await dbContext.SaveChangesAsync();
     }
 }

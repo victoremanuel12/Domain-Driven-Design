@@ -7,7 +7,6 @@ using Wpm.Clinic.Application.Handlers;
 using Wpm.Clinic.Domain.Entities;
 using Wpm.Clinic.Infra.Data.Repository;
 using Wpm.SharedKerbel.Abstract;
-using Wpm.SharedKerbel.CommandHandler;
 
 namespace Wpm.Clinic.Infra.IoC
 {

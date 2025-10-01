@@ -1,7 +1,6 @@
 ﻿using Wpm.Clinic.Application.Commands;
 using Wpm.Clinic.Domain.Entities;
 using Wpm.SharedKerbel.Abstract;
-using Wpm.SharedKerbel.CommandHandler;
 
 namespace Wpm.Clinic.Application.Handlers
 {

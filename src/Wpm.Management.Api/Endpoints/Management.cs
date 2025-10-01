@@ -3,7 +3,7 @@ using Wpm.Management.Api.Endpoints.EndpointCollection;
 using Wpm.Management.Api.EndpointsExtension;
 using Wpm.Management.Application.Commands;
 using Wpm.Management.Application.Services;
-using Wpm.SharedKerbel.CommandHandler;
+using Wpm.SharedKerbel.Abstract;
 
 namespace Wpm.Management.Api.Endpoints
 {

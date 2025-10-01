@@ -2,8 +2,8 @@
 using Wpm.Clinic.Api.Endpoints.Intefaces;
 using Wpm.Clinic.Api.EndpointsExtension;
 using Wpm.Clinic.Application.Commands;
-using Wpm.SharedKerbel.CommandHandler;
 using Wpm.Management.Api.Endpoints.EndpointCollection;
+using Wpm.SharedKerbel.Abstract;
 
 namespace Wpm.Management.Api.Endpoints
 {

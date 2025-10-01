@@ -10,7 +10,6 @@ using Wpm.Management.Domain.Services.Interfaces;
 using Wpm.Management.Infra.Data;
 using Wpm.Management.Infra.Data.Repository;
 using Wpm.SharedKerbel.Abstract;
-using Wpm.SharedKerbel.CommandHandler;
 
 namespace Wpm.Management.Infra.IoC
 {
