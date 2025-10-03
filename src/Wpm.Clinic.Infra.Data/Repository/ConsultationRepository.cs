@@ -9,7 +9,8 @@ namespace Wpm.Clinic.Infra.Data.Repository
         public async Task<Guid> InsertAsync(Consultation consultation)
         {
             dbContext.Consultations.Add(consultation);
-            await dbContext.SaveChangesAsync();
+            await SaveChangesAsync();
+
             return consultation.Id;
         }
         public async Task<IEnumerable<Consultation>> GetAllAsync() => await dbContext.Consultations.ToListAsync();
@@ -19,8 +20,9 @@ namespace Wpm.Clinic.Infra.Data.Repository
 
         public async Task UpdateAsync(Consultation consultation)
         {
-            dbContext.Consultations.Update(consultation); 
-            await dbContext.SaveChangesAsync();
+            dbContext.Consultations.Update(consultation);
+            await SaveChangesAsync();
+
         }
         public async Task DeleteAsync(Guid id)
         {
@@ -33,5 +35,6 @@ namespace Wpm.Clinic.Infra.Data.Repository
         {
             await dbContext.SaveChangesAsync();
         }
+
     }
 }

@@ -11,7 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Wpm.Clinic.Domain\Wpm.Clinic.Domain.csproj" />
+    <ProjectReference Include="..\Wpm.Clinic.Infra.Data\Wpm.Clinic.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>

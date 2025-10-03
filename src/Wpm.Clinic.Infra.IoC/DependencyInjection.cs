@@ -6,6 +6,7 @@ using Wpm.Clinic.Application.Commands;
 using Wpm.Clinic.Application.Handlers;
 using Wpm.Clinic.Domain.Entities;
 using Wpm.Clinic.Infra.Data.Repository;
+using Wpm.Clinic.Infra.Data.Repository.Interfaces;
 using Wpm.SharedKerbel.Abstract;
 
 namespace Wpm.Clinic.Infra.IoC
@@ -29,6 +30,8 @@ namespace Wpm.Clinic.Infra.IoC
             services.AddScoped<ICommandHandler<SetDiagnosisCommand>, SetDiagnosisCommandHandler>();
             services.AddScoped<ICommandHandler<SetDiagnosisCommand>, SetDiagnosisCommandHandler>();
             services.AddScoped<ICommandHandler<EndConsultationCommand>, EndConsultationCommandHandler>();
+            services.AddScoped<IEventStore, EventStoreRepository>();
+
 
 
 
