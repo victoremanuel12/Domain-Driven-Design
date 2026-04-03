@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Wpm.Management.Application.Commands;
 using Wpm.Management.Application.Handlers;
 using Wpm.Management.Application.Services;
-using Wpm.Management.Domain.Entities;
+using Wpm.Management.Domain.Repositories;
 using Wpm.Management.Domain.Services.Interfaces;
 using Wpm.Management.Infra.Data;
 using Wpm.Management.Infra.Data.Repository;
@@ -23,6 +23,7 @@ namespace Wpm.Management.Infra.IoC
                 options.UseSqlite(connectionString));
 
             services.AddScoped<IRepository<Pet>, ManagementRepository>();
+            services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<ICommandHandler<SetWeightCommand>, SetWeightCommandHandler>();
             services.AddScoped<IBreedService, BreedService>();
 

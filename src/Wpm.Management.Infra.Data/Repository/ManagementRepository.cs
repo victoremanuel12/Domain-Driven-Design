@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Wpm.Management.Domain.Entities;
 using Wpm.SharedKerbel.Abstract;
 
 namespace Wpm.Management.Infra.Data.Repository;

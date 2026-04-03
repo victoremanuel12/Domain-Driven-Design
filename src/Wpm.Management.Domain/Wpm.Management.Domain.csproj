@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Wpm.SharedKerbel\Wpm.SharedKerbel.csproj" />
+    <Compile Remove="Repository\**" />
+    <EmbeddedResource Remove="Repository\**" />
+    <None Remove="Repository\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repository\Interfaces\" />
+    <ProjectReference Include="..\Wpm.SharedKerbel\Wpm.SharedKerbel.csproj" />
   </ItemGroup>
 
 </Project>
