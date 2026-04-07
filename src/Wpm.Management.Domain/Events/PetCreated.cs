@@ -2,6 +2,6 @@
 
 namespace Wpm.Management.Domain.Events
 {
-    public record PetCreated(Guid Id, Guid BeedId) : IDomainEvent;
+    public record PetCreated(Guid Id, Guid BreedId) : IDomainEvent;
 
 }

@@ -56,6 +56,7 @@ public class Pet : Entity
         );
     }
 
+
     private void SetWeightClass(IBreedService breedService)
     {
         var breed = breedService.GetBreed(BreedId.Value);

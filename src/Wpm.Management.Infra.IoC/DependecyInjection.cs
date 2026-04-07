@@ -2,14 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Wpm.Infrastructure.Messaging;
 using Wpm.Management.Application.Commands;
 using Wpm.Management.Application.Handlers;
 using Wpm.Management.Application.Services;
 using Wpm.Management.Domain.Repositories;
+using Wpm.Management.Domain.Services;
 using Wpm.Management.Domain.Services.Interfaces;
 using Wpm.Management.Infra.Data;
 using Wpm.Management.Infra.Data.Repository;
 using Wpm.SharedKerbel.Abstract;
+using Wpm.SharedKerbel.IntegrationEvent.Wpm.SharedKernel.Messaging;
 
 namespace Wpm.Management.Infra.IoC
 {
@@ -26,7 +29,12 @@ namespace Wpm.Management.Infra.IoC
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<ICommandHandler<SetWeightCommand>, SetWeightCommandHandler>();
             services.AddScoped<IBreedService, BreedService>();
-
+            services.AddSingleton<IntegrationEventPublisher>(s =>
+            {
+                var configuration = s.GetRequiredService<IConfiguration>();
+                var connectionString = configuration["AzureServiceBus:ConnectionString"];
+                return new AzureServiceBusPublisher(connectionString!);
+            });
             services.AddScoped<ManagementApplicationService>();
 
             return services;
