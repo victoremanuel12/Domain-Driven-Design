@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Wpm.Management.Api.Endpoints.EndpointCollection;
+﻿using Wpm.Management.Api.Endpoints.EndpointCollection;
 using Wpm.Management.Api.EndpointsExtension;
 using Wpm.Management.Application.Commands;
 using Wpm.Management.Application.Services;
@@ -17,6 +16,11 @@ namespace Wpm.Management.Api.Endpoints
                 await managementApplicationService.Handle(command);
                 return Results.Ok();
             }).WithAutoName(EndpointManagementConstantCollection.Management, "CreatePet");
+            group.MapPost("/Adopt", async (AdoptPetCommand command, ICommandHandler<AdoptPetCommand> commandHandler) =>
+            {
+                await commandHandler.Handle(command);
+                return Results.Ok();
+            }).WithAutoName(EndpointManagementConstantCollection.Management, "Adopt");
             group.MapPut("/", async (
                 ICommandHandler<SetWeightCommand> commandHandler,
                 ManagementApplicationService managementApplicationService,

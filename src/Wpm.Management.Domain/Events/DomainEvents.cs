@@ -6,6 +6,7 @@ namespace Wpm.Management.Domain.Events
     {
         public static DomainEventDispatcher<PetWeightUpdated> PetWeightUpdated = new();
         public static DomainEventDispatcher<PetCreated> PetCreated = new();
+        public static DomainEventDispatcher<PetAdopted> PetAdopted = new();
 
     }
 }

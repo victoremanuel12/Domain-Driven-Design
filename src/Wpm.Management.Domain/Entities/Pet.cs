@@ -15,6 +15,7 @@ public class Pet : Entity
     public SexOfPet SexOfPet { get; private set; }
     public BreedId BreedId { get; private set; }
 
+    public DateTime? AdoptedAt { get; private set; }
     protected Pet() { }
 
     private Pet(Guid id, string name, int age, SexOfPet sexOfPet, string color, BreedId breedId)
@@ -45,17 +46,21 @@ public class Pet : Entity
         if (weight == null)
             throw new ArgumentException("Weight cannot be null");
 
-        if (breedService == null)
-            throw new ArgumentException("BreedService cannot be null");
-
-        SetWeightClass(breedService);
         Weight = weight;
+        SetWeightClass(breedService);
 
         DomainEvents.PetWeightUpdated.Publish(
             new PetWeightUpdated(Id, Weight)
         );
     }
+    public void Adopt()
+    {
+        PetCanBeAdopte();
 
+        DomainEvents.PetAdopted.Publish(
+            new PetAdopted(Id, Name, AdoptedAt.Value)
+        );
+    }
 
     private void SetWeightClass(IBreedService breedService)
     {
@@ -98,5 +103,12 @@ public class Pet : Entity
 
         if (breedId == null)
             throw new ArgumentException("BreedId is required");
+    }
+    private void PetCanBeAdopte ()
+    {
+        if (Age < 2)
+            throw new InvalidOperationException("Pet is too young to be adopted");
+        if(Age > 15)
+            throw new InvalidOperationException("Pet is too old to be adopted");
     }
 }

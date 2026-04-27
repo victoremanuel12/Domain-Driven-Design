@@ -28,6 +28,7 @@ namespace Wpm.Management.Infra.IoC
             services.AddScoped<IRepository<Pet>, ManagementRepository>();
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<ICommandHandler<SetWeightCommand>, SetWeightCommandHandler>();
+            services.AddScoped<ICommandHandler<AdoptPetCommand>, AdoptCommandHandler>();
             services.AddScoped<IBreedService, BreedService>();
             services.AddSingleton<IntegrationEventPublisher>(s =>
             {
