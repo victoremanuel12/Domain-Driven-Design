@@ -26,7 +26,7 @@ namespace Wpm.Management.Application.Services
             DomainEvents.PetCreated.Subscribe(async (domainEvent) =>
             {
                 var integrationEvent = new PetCreatedIntegrationEvent(domainEvent.Id, domainEvent.BreedId);
-                await _publisher.PublishAsync(integrationEvent, QueueNames.Pet.Created);
+                await _publisher.PublishAsync(integrationEvent, QueueNames.Pet.ManagementPetQueue);
 
             });
         }

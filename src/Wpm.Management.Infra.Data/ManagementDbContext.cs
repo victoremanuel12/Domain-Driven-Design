@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Wpm.Management.Domain.Entities;
 using Wpm.Management.Domain.ValueObjects;
 namespace Wpm.Management.Infra.Data
 {
@@ -15,6 +14,7 @@ namespace Wpm.Management.Infra.Data
                 entity.Property(e => e.BreedId).HasConversion(v => v.Value, v => BreedId.Create(v));
                 entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
                 entity.Property(e => e.Color).HasMaxLength(50);
+                entity.Property(e => e.AdoptedAt);
             });
         }
     }

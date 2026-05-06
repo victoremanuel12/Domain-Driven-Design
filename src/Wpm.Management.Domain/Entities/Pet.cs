@@ -56,7 +56,7 @@ public class Pet : Entity
     public void Adopt()
     {
         PetCanBeAdopte();
-
+        AdoptedAt = DateTime.UtcNow;
         DomainEvents.PetAdopted.Publish(
             new PetAdopted(Id, Name, AdoptedAt.Value)
         );

@@ -5,7 +5,7 @@
         public static class Pet
         {
             // This queue is used to trigger the creation of a pet when a new pet is created in the system.(desconsiderar o nome da fila, é apenas um exemplo)
-            public const string Created = "first-queue";
+            public const string ManagementPetQueue = "first-queue";
             public const string Updated = "pet-updated";
         }
 
