@@ -15,7 +15,7 @@ namespace Wpm.Management.Infra.Data.Repository
         public async Task<Pet?> GetByIdAsync(Guid id)
         {
             return await _db.Pets
-                .FirstOrDefaultAsync(p => p.Id == id);
+                .FirstOrDefaultAsync(p => p.Id.Value == id);
         }
 
         public async Task AddAsync(Pet pet)
@@ -26,6 +26,10 @@ namespace Wpm.Management.Infra.Data.Repository
         public async Task RemoveAsync(Pet pet)
         {
             _db.Pets.Remove(pet);
+        }
+        public async Task SaveChangesAsync()
+        {
+            await _db.SaveChangesAsync();
         }
     }
 }

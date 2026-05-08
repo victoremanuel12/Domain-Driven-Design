@@ -1,33 +1,32 @@
-﻿using Wpm.Management.Domain.Services.Interfaces;
-
-namespace Wpm.Management.Domain.ValueObjects
+﻿namespace Wpm.Management.Domain.ValueObjects
 {
-    public record BreedId
+    public sealed record BreedId
     {
-        private readonly IBreedService _breedService;
-        public Guid Value { get; init; }
+        public Guid Value { get; }
+
         private BreedId(Guid value)
         {
+            if (value == Guid.Empty)
+                throw new ArgumentException("Invalid breed identifier");
+
             Value = value;
         }
 
-        public static BreedId Create(Guid value)
+        public static BreedId Create(Guid existingGuid)
         {
-            return new BreedId(value);
-        }
-        public BreedId(Guid value, IBreedService breedService)
-        {
-            _breedService = breedService;
-            ValidateBreed(value);
-            Value = value;
+            return new BreedId(existingGuid);
         }
 
-        private void ValidateBreed(Guid value)
+        public static BreedId New()
         {
-            if(_breedService.GetBreed(value) == null)
-            {
-                throw new ArgumentException("Breed is not valid");
-            }
+            Guid generatedGuid = Guid.NewGuid();
+
+            return new BreedId(generatedGuid);
+        }
+
+        public override string ToString()
+        {
+            return Value.ToString();
         }
     }
 }

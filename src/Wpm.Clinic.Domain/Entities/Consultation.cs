@@ -5,7 +5,7 @@ using Wpm.SharedKernel.ValueObjects;
 
 namespace Wpm.Clinic.Domain.Entities
 {
-    public class Consultation : AggregateRoot
+    public class Consultation : AggregateRoot<Guid>
     {
         private readonly List<DrugAdministration> administratedDrugs = new();
         private readonly List<VitalSigns> vitalSignsReadings = new();

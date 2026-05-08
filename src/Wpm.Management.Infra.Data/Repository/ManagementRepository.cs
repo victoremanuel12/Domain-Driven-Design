@@ -7,7 +7,7 @@ public class ManagementRepository(ManagementDbContext dbContext) : IRepository<P
 {
 
     public async Task<Pet?> GetByIdAsync(Guid id)
-        => await dbContext.Pets.FirstOrDefaultAsync(p => p.Id == id);
+        => await dbContext.Pets.FirstOrDefaultAsync(p => p.Id.Value == id);
 
     public async Task<IEnumerable<Pet>> GetAllAsync()
         => await dbContext.Pets.ToListAsync();
@@ -16,7 +16,7 @@ public class ManagementRepository(ManagementDbContext dbContext) : IRepository<P
     {
         await dbContext.Pets.AddAsync(pet);
         await SaveChangesAsync();
-        return pet.Id;
+        return pet.Id.Value;
     }
 
     public async Task UpdateAsync(Pet pet)
@@ -27,7 +27,7 @@ public class ManagementRepository(ManagementDbContext dbContext) : IRepository<P
 
     public async Task DeleteAsync(Guid id)
     {
-        var pet = await dbContext.Pets.FirstOrDefaultAsync(p => p.Id == id);
+        var pet = await dbContext.Pets.FirstOrDefaultAsync(p => p.Id.Value == id);
         if (pet != null)
         {
             dbContext.Pets.Remove(pet);

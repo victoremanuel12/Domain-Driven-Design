@@ -25,7 +25,7 @@ namespace Wpm.Management.Application.Services
             _publisher = publisher;
             DomainEvents.PetCreated.Subscribe(async (domainEvent) =>
             {
-                var integrationEvent = new PetCreatedIntegrationEvent(domainEvent.Id, domainEvent.BreedId);
+                var integrationEvent = new PetCreatedIntegrationEvent(domainEvent.Id.Value, domainEvent.BreedId.Value);
                 await _publisher.PublishAsync(integrationEvent, QueueNames.Pet.ManagementPetQueue);
 
             });
@@ -33,18 +33,17 @@ namespace Wpm.Management.Application.Services
 
         public async Task Handle(CreatePetCommand command)
         {
-            var breedId = new BreedId(command.BreedId, _breedService);
-
             var newPet = Pet.Create(
-                command.Id,
                 command.Name,
                 command.Age,
                 command.SexOfPet,
                 command.Color,
-                breedId
+                BreedId.Create(command.BreedId)
             );
 
             await _repository.AddAsync(newPet);
+            await _repository.SaveChangesAsync();
+
         }
     }
 }

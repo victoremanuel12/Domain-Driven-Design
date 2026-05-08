@@ -1,5 +1,7 @@
-﻿namespace Wpm.Management.Application.Commands
+﻿using Wpm.Management.Domain.ValueObjects;
+
+namespace Wpm.Management.Application.Commands
 {
-    public record SetWeightCommand(Guid Id, decimal Weight);
+    public record SetWeightCommand(PetId Id, decimal Weight);
     
 }

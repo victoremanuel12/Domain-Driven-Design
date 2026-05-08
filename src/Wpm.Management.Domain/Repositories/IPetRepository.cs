@@ -5,5 +5,6 @@
         Task<Pet?> GetByIdAsync(Guid id);
         Task AddAsync(Pet pet);
         Task RemoveAsync(Pet pet);
+        Task SaveChangesAsync();
     }
 }

@@ -10,6 +10,7 @@ namespace Wpm.Management.Infra.Data
             modelBuilder.Entity<Pet>(entity =>
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).HasConversion(v => v.Value, v => PetId.Create(v));
                 entity.OwnsOne(e => e.Weight);
                 entity.Property(e => e.BreedId).HasConversion(v => v.Value, v => BreedId.Create(v));
                 entity.Property(e => e.Name).IsRequired().HasMaxLength(100);

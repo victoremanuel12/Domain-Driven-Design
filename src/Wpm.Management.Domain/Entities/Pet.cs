@@ -5,7 +5,7 @@ using Wpm.Management.Domain.ValueObjects;
 using Wpm.SharedKernel;
 using Wpm.SharedKernel.ValueObjects;
 
-public class Pet : Entity
+public class Pet : Entity<PetId>
 {
     public string Name { get; private set; }
     public int Age { get; private set; }
@@ -18,8 +18,9 @@ public class Pet : Entity
     public DateTime? AdoptedAt { get; private set; }
     protected Pet() { }
 
-    private Pet(Guid id, string name, int age, SexOfPet sexOfPet, string color, BreedId breedId)
+    private Pet(PetId id, string name, int age, SexOfPet sexOfPet, string color, BreedId breedId)
     {
+
         Validate(name, age, color, breedId);
 
         Id = id;
@@ -30,13 +31,10 @@ public class Pet : Entity
         BreedId = breedId;
     }
 
-    public static Pet Create(Guid id, string name, int age, SexOfPet sexOfPet, string color, BreedId breedId)
+    public static Pet Create(string name, int age, SexOfPet sexOfPet, string color, BreedId breedId)
     {
-        var pet = new Pet(id, name, age, sexOfPet, color, breedId);
-
-        DomainEvents.PetCreated.Publish(
-            new PetCreated(pet.Id, pet.BreedId.Value)
-        );
+        var pet = new Pet(PetId.New(), name, age, sexOfPet, color, breedId);
+        DomainEvents.PetCreated.Publish(new PetCreated(pet.Id, pet.BreedId));
 
         return pet;
     }
@@ -48,7 +46,6 @@ public class Pet : Entity
 
         Weight = weight;
         SetWeightClass(breedService);
-
         DomainEvents.PetWeightUpdated.Publish(
             new PetWeightUpdated(Id, Weight)
         );
@@ -64,7 +61,7 @@ public class Pet : Entity
 
     private void SetWeightClass(IBreedService breedService)
     {
-        var breed = breedService.GetBreed(BreedId.Value);
+        var breed = breedService.GetBreed(BreedId);
 
         if (breed == null)
             throw new ArgumentException("Breed not found");
@@ -104,11 +101,11 @@ public class Pet : Entity
         if (breedId == null)
             throw new ArgumentException("BreedId is required");
     }
-    private void PetCanBeAdopte ()
+    private void PetCanBeAdopte()
     {
         if (Age < 2)
             throw new InvalidOperationException("Pet is too young to be adopted");
-        if(Age > 15)
+        if (Age > 15)
             throw new InvalidOperationException("Pet is too old to be adopted");
     }
 }

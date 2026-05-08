@@ -2,7 +2,7 @@
 
 namespace Wpm.Clinic.Domain.Entities
 {
-    public class VitalSigns : Entity
+    public class VitalSigns : Entity<Guid>
     {
         public Guid ConsultationId { get; private set; } 
         public DateTime ReadingDateTime { get; init; }

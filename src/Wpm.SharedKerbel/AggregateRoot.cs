@@ -2,7 +2,7 @@
 
 namespace Wpm.SharedKernel
 {
-    public abstract class AggregateRoot : Entity
+    public abstract class AggregateRoot<TId> : Entity<TId>
     {
         private readonly List<IDomainEvent> changes = new();
         public int Version { get; private set; }

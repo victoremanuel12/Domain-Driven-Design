@@ -12,32 +12,26 @@ public class PetTest
     {
         var id = Guid.NewGuid();
         var service = new FakeBreedService();
-        var b1 = new BreedId(service.breeds[0].Id, service);
-        var pet1 = Pet.Create(id, "Duque", 2, SexOfPet.Male, "White", b1);
-        var pet2 = Pet.Create(id, "Frajola", 2, SexOfPet.Male, "Black", b1);
+        var b1 = BreedId.New();
+        var pet1 = Pet.Create("Duque", 2, SexOfPet.Male, "White", b1);
+        var pet2 = Pet.Create("Frajola", 2, SexOfPet.Male, "Black", b1);
         Assert.True(pet1.Equals(pet2));
     }
     [Fact]
     public void Pet_should_be_equal_using_operators()
     {
         var id = Guid.NewGuid();
-        var service = new FakeBreedService();
-        var idBread = service.breeds.First().Id;
-        var b1 = new BreedId(idBread, service);
-        var pet1 = Pet.Create(id, "Duque", 2, SexOfPet.Male, "White", b1);
-        var pet2 = Pet.Create(id, "Frajola", 2, SexOfPet.Male, "Black", b1);
+        var b1 = BreedId.New();
+        var pet1 = Pet.Create("Duque", 2, SexOfPet.Male, "White", b1);
+        var pet2 = Pet.Create("Frajola", 2, SexOfPet.Male, "Black", b1);
         Assert.True(pet1 == pet2);
     }
     [Fact]
     public void Pet_should_not_be_equal_using_operators()
     {
-        var firstId = Guid.NewGuid();
-        var secondId = Guid.NewGuid();
-        var service = new FakeBreedService();
-        var id = service.breeds.First().Id;
-        var b1 = new BreedId(id, service);
-        var pet1 =  Pet.Create(firstId, "Duque", 2, SexOfPet.Male, "White", b1);
-        var pet2 = Pet.Create(secondId, "Frajola", 2, SexOfPet.Male, "Black", b1);
+        var b1 = BreedId.New();
+        var pet1 =  Pet.Create("Duque", 2, SexOfPet.Male, "White", b1);
+        var pet2 = Pet.Create("Frajola", 2, SexOfPet.Male, "Black", b1);
         Assert.True(pet1 != pet2);
     }
     [Fact]
@@ -59,25 +53,24 @@ public class PetTest
     {
         var service = new FakeBreedService();
         var id = service.breeds.First().Id;
-        var b1 = new BreedId(id, service);
+        var b1 = BreedId.New();
         Assert.NotNull(b1);
     }
     [Fact]
     public void BreedId_should_not_be_Valid()
     {
-        var service = new FakeBreedService();
-        var id = Guid.NewGuid();
+        var id = Guid.Empty;
         Assert.Throws<ArgumentNullException>(() =>
         {
-            var b1 = new BreedId(id, service);
+            var b1 = BreedId.Create(id);
         });
     }
     [Fact]
     public void WeightClass_shold_be_ideal()
     {
         var breedService = new FakeBreedService();
-        var breedId = new BreedId(breedService.breeds[0].Id, breedService);
-        var pet =  Pet.Create(Guid.NewGuid(), "Duque", 2, SexOfPet.Male, "White", breedId);
+        var breedId = BreedId.New();
+        var pet =  Pet.Create("Duque", 2, SexOfPet.Male, "White", breedId);
         pet.SetWeight(10, breedService);
         Assert.True(pet.WeightClass == WeightClass.Ideal);
     }
@@ -85,8 +78,8 @@ public class PetTest
     public void WeightClass_shold_be_underweight()
     {
         var breedService = new FakeBreedService();
-        var breedId = new BreedId(breedService.breeds[0].Id, breedService);
-        var pet = Pet.Create(Guid.NewGuid(), "Duque", 2, SexOfPet.Male, "White", breedId);
+        var breedId = BreedId.New();
+        var pet = Pet.Create("Duque", 2, SexOfPet.Male, "White", breedId);
         pet.SetWeight(4, breedService);
         Assert.True(pet.WeightClass == WeightClass.Underweight);
     }
@@ -94,8 +87,8 @@ public class PetTest
     public void WeightClass_shold_be_overweight()
     {
         var breedService = new FakeBreedService();
-        var breedId = new BreedId(breedService.breeds[0].Id, breedService);
-        var pet =  Pet.Create(Guid.NewGuid(), "Duque", 2, SexOfPet.Female, "White", breedId);
+        var breedId = BreedId.New();
+        var pet =  Pet.Create("Duque", 2, SexOfPet.Female, "White", breedId);
         pet.SetWeight(21, breedService);
         Assert.True(pet.WeightClass == WeightClass.Overweight);
     }

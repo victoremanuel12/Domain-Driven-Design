@@ -1,26 +1,44 @@
 ﻿namespace Wpm.SharedKernel
 {
-    public abstract class Entity : IEquatable<Entity>
+    public abstract class Entity<TId> : IEquatable<Entity<TId>>
     {
-        public Guid Id { get; protected set; }
+        public TId Id { get; protected set; }
 
-
-        public static bool operator ==(Entity? left, Entity? right)
+        public override bool Equals(object? obj)
         {
-            if (left is null && right is null) return true;
-            if (left is null || right is null) return false;
-            return left.Id == right.Id;
+            if (obj is not Entity<TId> other)
+                return false;
+
+            return EqualityComparer<TId>.Default.Equals(Id, other.Id);
         }
-        public static bool operator !=(Entity? left, Entity? right)
+
+        public bool Equals(Entity<TId>? other)
+        {
+            if (other is null)
+                return false;
+
+            return EqualityComparer<TId>.Default.Equals(Id, other.Id);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id!.GetHashCode();
+        }
+
+        public static bool operator ==(Entity<TId>? left, Entity<TId>? right)
+        {
+            if (left is null && right is null)
+                return true;
+
+            if (left is null || right is null)
+                return false;
+
+            return EqualityComparer<TId>.Default.Equals(left.Id, right.Id);
+        }
+
+        public static bool operator !=(Entity<TId>? left, Entity<TId>? right)
         {
             return !(left == right);
-        }
-
-        public bool Equals(Entity? obj)
-        {
-            if (obj is null) return false;
-            if (obj is not Entity entity) return false;
-            return Id == entity.Id;
         }
     }
 }
