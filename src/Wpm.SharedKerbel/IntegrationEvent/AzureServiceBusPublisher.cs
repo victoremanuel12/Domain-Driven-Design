@@ -5,7 +5,7 @@ using System.Text;
 using Wpm.SharedKerbel.Abstract;
 using Wpm.SharedKerbel.IntegrationEvent.Wpm.SharedKernel.Messaging;
 
-namespace Wpm.Infrastructure.Messaging
+namespace Wpm.SharedKerbel.IntegrationEvent
 {
     public class AzureServiceBusPublisher(string connectionString) : IntegrationEventPublisher
     {

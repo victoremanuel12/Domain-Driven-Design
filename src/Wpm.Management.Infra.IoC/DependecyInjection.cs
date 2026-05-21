@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Wpm.Infrastructure.Messaging;
 using Wpm.Management.Application.Commands;
 using Wpm.Management.Application.Handlers;
 using Wpm.Management.Application.Services;
@@ -12,6 +11,7 @@ using Wpm.Management.Domain.Services.Interfaces;
 using Wpm.Management.Infra.Data;
 using Wpm.Management.Infra.Data.Repository;
 using Wpm.SharedKerbel.Abstract;
+using Wpm.SharedKerbel.IntegrationEvent;
 using Wpm.SharedKerbel.IntegrationEvent.Wpm.SharedKernel.Messaging;
 
 namespace Wpm.Management.Infra.IoC
