@@ -1,13 +1,12 @@
 using Scalar.AspNetCore;
-using Wpm.Management.Api.EndpointsExtension;
 using Wpm.Rescue.Api.EndpointsExtension;
-
+using Wpm.Rescue.Infra.IoC;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 var app = builder.Build();
 app.MapAllEndpoints();
-//app.EnsureDatabaseIsCreated();
+app.EnsureDatabaseIsCreated();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
