@@ -3,7 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Wpm.Rescue.Infra.Data;
-
+using Wpm.SharedKerbel.IntegrationEvent.interfaces;
+//using Microsoft.Extensions.Hosting;
 namespace Wpm.Rescue.Infra.IoC
 {
     public static class DependecyInjection
@@ -14,13 +15,8 @@ namespace Wpm.Rescue.Infra.IoC
 
             services.AddDbContext<RescueDbContext>(options =>
                 options.UseSqlite(connectionString));
-            //services.AddSingleton<IntegrationEventPublisher>(s =>
-            //{
-            //    var configuration = s.GetRequiredService<IConfiguration>();
-            //    var connectionString = configuration["AzureServiceBus:ConnectionString"];
-            //    return new AzureServiceBusPublisher(connectionString!);
-            //});
-
+            //services.AddHostedService<PetAdoptedIntegrationEventHandler>();
+            services.AddSingleton<IIntegrationEventConsumer, AzureServiceBusConsumer>();
             return services;
         }
     }

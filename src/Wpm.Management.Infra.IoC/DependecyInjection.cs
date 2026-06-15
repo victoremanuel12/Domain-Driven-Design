@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Azure.Messaging.ServiceBus;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Wpm.Management.Application.Commands;
+using Wpm.Management.Application.EventSubscribers;
 using Wpm.Management.Application.Handlers;
 using Wpm.Management.Application.Services;
 using Wpm.Management.Domain.Repositories;
@@ -30,17 +32,19 @@ namespace Wpm.Management.Infra.IoC
             services.AddScoped<ICommandHandler<SetWeightCommand>, SetWeightCommandHandler>();
             services.AddScoped<ICommandHandler<AdoptPetCommand>, AdoptCommandHandler>();
             services.AddScoped<IBreedService, BreedService>();
-            services.AddSingleton<IntegrationEventPublisher>(s =>
+            services.AddSingleton<ServiceBusClient>(s =>
             {
                 var configuration = s.GetRequiredService<IConfiguration>();
-                var connectionString = configuration["AzureServiceBus:ConnectionString"];
-                return new AzureServiceBusPublisher(connectionString!);
+                return new ServiceBusClient(configuration["AzureServiceBus:ConnectionString"]!);
             });
+            services.AddSingleton<IIntegrationEventPublisher, AzureServiceBusPublisher>();
+            services.AddSingleton<PetDomainEventSubscriber>();
             services.AddScoped<ManagementApplicationService>();
 
             return services;
         }
     }
+
     public static class ManagementDbContextExtensions
     {
         public static void EnsureDatabaseIsCreated(this IApplicationBuilder app)

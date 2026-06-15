@@ -4,7 +4,7 @@ namespace Wpm.SharedKerbel.IntegrationEvent
 {
     namespace Wpm.SharedKernel.Messaging
     {
-        public interface IntegrationEventPublisher
+        public interface IIntegrationEventPublisher
         {
             public Task PublishAsync(IIntegrationEvent integrationEvent, string topicName);
         }

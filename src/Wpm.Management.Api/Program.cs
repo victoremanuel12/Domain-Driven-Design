@@ -1,5 +1,6 @@
 using Scalar.AspNetCore;
 using Wpm.Management.Api.EndpointsExtension;
+using Wpm.Management.Application.EventSubscribers;
 using Wpm.Management.Infra.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,7 @@ builder.Services.AddOpenApi();
 var app = builder.Build();
 app.MapAllEndpoints();
 app.EnsureDatabaseIsCreated();
+app.Services.GetRequiredService<PetDomainEventSubscriber>();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();

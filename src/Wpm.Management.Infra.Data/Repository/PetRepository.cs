@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wpm.Management.Domain.Repositories;
+using Wpm.Management.Domain.ValueObjects;
 
 namespace Wpm.Management.Infra.Data.Repository
 {
@@ -12,10 +13,9 @@ namespace Wpm.Management.Infra.Data.Repository
             _db = db;
         }
 
-        public async Task<Pet?> GetByIdAsync(Guid id)
+        public async Task<Pet?> GetByIdAsync(PetId id)
         {
-            return await _db.Pets
-                .FirstOrDefaultAsync(p => p.Id.Value == id);
+            return await _db.Pets.FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task AddAsync(Pet pet)

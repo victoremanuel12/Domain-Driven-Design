@@ -13,11 +13,11 @@ namespace Wpm.Management.Application.Services
     {
         private readonly IBreedService _breedService;
         private readonly IPetRepository _repository;
-        private readonly IntegrationEventPublisher _publisher;
+        private readonly IIntegrationEventPublisher _publisher;
 
         public ManagementApplicationService(
             IBreedService breedService,
-            IntegrationEventPublisher publisher,
+            IIntegrationEventPublisher publisher,
             IPetRepository repository)
         {
             _breedService = breedService;
